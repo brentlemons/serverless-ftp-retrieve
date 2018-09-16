@@ -22,7 +22,7 @@ const getFtpFile = async (item, ftp, s3) => {
         };
       };
       
-      const { writeStream, promise } = uploadStream({Bucket:item.ftpRequest.destinationBucket, Key:item.fileName+'.'+item.fileDate});
+      const { writeStream, promise } = uploadStream({Bucket:item.ftpRequest.destinationBucket, Key:item.fileDate+'.'+item.fileName});
         stream.pipe(writeStream);
         return promise;
     });
@@ -31,7 +31,7 @@ const getFtpFile = async (item, ftp, s3) => {
 exports.handler = async (event) => {
   
   var s3 = new AWS.S3();
-  
+
   try {
 
     for (var record of event.Records) {
@@ -50,7 +50,3 @@ exports.handler = async (event) => {
   }
 
 };
-
-
-
-
